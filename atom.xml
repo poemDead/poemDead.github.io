@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <id>https://poemDead.github.io</id>
+    <title>Gridea</title>
+    <updated>2021-02-16T06:33:49.918Z</updated>
+    <generator>https://github.com/jpmonette/feed</generator>
+    <link rel="alternate" href="https://poemDead.github.io"/>
+    <link rel="self" href="https://poemDead.github.io/atom.xml"/>
+    <subtitle>温故而知新</subtitle>
+    <logo>https://poemDead.github.io/images/avatar.png</logo>
+    <icon>https://poemDead.github.io/favicon.ico</icon>
+    <rights>All rights reserved 2021, Gridea</rights>
+    <entry>
+        <title type="html"><![CDATA[2020年入秋了]]></title>
+        <id>https://poemDead.github.io/post/2020-nian-ru-qiu-liao/</id>
+        <link href="https://poemDead.github.io/post/2020-nian-ru-qiu-liao/">
+        </link>
+        <updated>2020-09-06T06:32:27.000Z</updated>
+        <content type="html"><![CDATA[<p>9月的第一个周末，害怕疫情自我隔离了无数天之后，总算是出门放了放风。（其实是因为论文的中期报告书没写完）</p>
+<p>周五总算是写了一份凑活的中期报告书交给了老师，焦虑转移成功。突然就是一身轻。晚上和老婆吃着711的炸鸡和uber eats点来的麻辣烫看了新的一期脱口秀大会。王勉的音乐脱口秀确实是非常牛逼，但是音乐真的是他的表演微不足道的一个特点，最根本的强大还是因为内容本身的优秀让大多数人可以产生共鸣。在那之上，配合上音乐和表演让段子的力量放大了很多倍。这场我觉得最亏的就是豆豆，豆豆的表演我真的很喜欢，非常全面，很能带动大家的情绪，可惜分在死亡之组，一票之差进入待定，还得再比一场太累了。反之，庞博那组着实有一点水了。</p>
+<p>周六和老婆去隔壁的隔壁车站的锦系町逛街，先是优衣库补充衣服，后来又去MUJI惯例补货。不得不说的是，MUJI咖啡厅的饭确实不错，价格没有很贵，味道都让人很满意。我老婆一个不爱吃内脏的人，意外的喜欢他家的鸡肝魔芋。打算回家后好好查查食谱，试图在家复刻一下。</p>
+<p>逛到8点多回家，到了车站之后居然下起了大暴雨。还好岛国的雨来也匆匆去也匆匆，刚开始看着车站外头的雨大得像是影视剧里洒水车洒出来似的，不过20分钟就已经几乎停了。</p>
+<p>回家之后，瘫在沙发上看起了乐队的夏天。进入十强之后的积分赛真是让人浑身舒服。一期就有十场表演，也不用担心淘汰只需要放轻松，听音乐。HyperSlash超级斩的那首歌真是动静结合，听完就很燥，很嗨。不过好像现场观众不太吃这一套的样子。福禄寿对她们预期很高，这场确实是有些失望。整首曲子她们想表达的东西我觉得不管是词还是曲都没能传达到位。外婆和少年心境毕竟更加切合自己的实际体验，音乐中所注入的感情让人自然而然就被打动和感染。但这次就显然缺少了一丝真情实感。希望她们可以继续努力。</p>
+<p>今天白天和老婆做完了家务，晚上好好把python的作业弄完，又是一夜鏖战。</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Scrapy官方文档教程]]></title>
+        <id>https://poemDead.github.io/post/scrapy-guan-fang-wen-dang-jiao-cheng/</id>
+        <link href="https://poemDead.github.io/post/scrapy-guan-fang-wen-dang-jiao-cheng/">
+        </link>
+        <updated>2020-09-06T06:30:29.000Z</updated>
+        <content type="html"><![CDATA[<h1 id="scrapy-tutorial-官方网站教程">Scrapy Tutorial 官方网站教程</h1>
+<blockquote>
+<p>目标是爬取quotes.toscrape.com</p>
+</blockquote>
+<h2 id="主要任务">主要任务</h2>
+<ol>
+<li>创建一个新的Scrapy项目</li>
+<li>写一个Spider来爬取网站并导出数据</li>
+<li>使用命令行来导出爬取到的数据</li>
+<li>修改爬虫来递归爬取接下来的</li>
+<li>学会使用Spider的参数</li>
+</ol>
+<h2 id="1-创建scrapy项目">1. 创建Scrapy项目</h2>
+<pre><code>scrapy startproject tutorial
+</code></pre>
+<p>这时的目录结构是这样的</p>
+<pre><code>.
+├── scrapy.cfg
+└── tutorial
+    ├── __init__.py
+    ├── items.py
+    ├── middlewares.py
+    ├── pipelines.py
+    ├── settings.py
+    └── spiders
+        └── __init__.py
+</code></pre>
+<blockquote>
+<p>插播一下，如何实现这样的目录结构。在terminal之中先使用sudo apt-get install tree安装tree这个指令，最后在目标目录里使用tree即可</p>
+</blockquote>
+<h2 id="2我们的第一个spider">2.我们的第一个Spider</h2>
+<p>Spider是你定义的类，Scrapy会使用Spider来爬取对应网站的信息。</p>
+<p>你创建的Spider必须继承自Spider类，指定一开始的request请求的，以及如何处理取得的页面信息并取出需要的数据。</p>
+<p>第一个Spider的代码。请保存在<code>tutorial/spiders</code>文件夹下的<code>quotes_spider.py</code>文件里。</p>
+<pre><code class="language-python">import scrapy
+
+
+class QuotesSpider(scrapy.Spider):
+    name = &quot;quotes&quot;
+
+    def start_requests(self):
+        urls = [
+            'http://quotes.toscrape.com/page/1/',
+            'http://quotes.toscrape.com/page/2/',
+        ]
+        for url in urls:
+            yield scrapy.Request(url=url, callback=self.parse)
+
+    def parse(self, response):
+        page = response.url.split(&quot;/&quot;)[-2]
+        filename = 'quotes-%s.html' % page
+        with open(filename, 'wb') as f:
+            f.write(response.body)
+        self.log('Saved file %s' % filename)
+</code></pre>
+<ol>
+<li>首先我们继承自<code>scrapy.Spider</code>，其次我们定义了一些属性和方法。</li>
+<li><code>name</code>用来命名Spider。在一个Scrapy项目内必须独一无二。</li>
+<li><code>start_requests</code>包含一系列让Spider进行爬取的Requests地址。随后的请求会从这些起始地址中继续生成。</li>
+<li><code>parse()</code>是一个用来处理每一个response downloaded。它的参数是<code>TextResponse</code>的一个实例。主要负责抓取页面内容并且提供了一系列用来处理内容的方法。<code>parse()</code>方法通常用来解析响应，提取数据为字典，并且寻找新的Urls，创建新的requests</li>
+</ol>
+<h2 id="3-如何运行我们的spider">3. 如何运行我们的Spider</h2>
+<p>在项目目录的最顶层（<code>tutorial/</code>），运行以下代码:</p>
+<pre><code>scrapy crawl quotes
+</code></pre>
+<blockquote>
+<p>这里注意Spider的文件名是<code>quotes_spider.py</code>但Spider自己的名字是我们在代码中定义的<code>name</code>,也就是<code>quotes</code>。所以这里的指令也使用<code>quotes</code>。<br>
+运行之后会得到类似以下的输出：</p>
+</blockquote>
+<pre><code class="language-cmd">2020-09-07 11:00:17 [scrapy.core.engine] INFO: Spider closed (finished)
+</code></pre>
+<p>目录内会出现<code>quotes-1.html</code>和<code>quotes-2.html</code>两个文件。（这次我们还没有对html本身进行解析，之后会讲到的）</p>
+<h3 id="刚才发生了什么">刚才发生了什么？</h3>
+<p>Scrapy调用<code>start_quests</code>方法返回<code>scrapy.Request</code>对象。收到每一个response时，实例化response对象并调用关联的回调方法（此处为<code>parse()</code>），并将response作为参数传递。</p>
+<h3 id="start_requests的一个快捷方法">start_requests的一个快捷方法</h3>
+<p>现在，我们使用<code>start_requests</code>方法用urls生成了<code>scrapy.Request</code>的对象。</p>
+<p>但我们也可以直接定义一个<code>start_urls</code>的属性，包含一个urls的list。它会作为默认的<code>start_requests</code>来开始请求。</p>
+<pre><code class="language-python">import scrapy
+
+
+class QuotesSpider(scrapy.Spider):
+    name = &quot;quotes&quot;
+    start_urls = [
+        'http://quotes.toscrape.com/page/1/',
+        'http://quotes.toscrape.com/page/2/',
+    ]
+
+    def parse(self, response):
+        page = response.url.split(&quot;/&quot;)[-2]
+        filename = 'quotes-%s.html' % page
+        with open(filename, 'wb') as f:
+            f.write(response.body)
+</code></pre>
+<p>随后<code>parse()</code>会默默处理每一个请求。因为它是scrapy的默认callback方法。</p>
+<h2 id="4-抽出数据">4. 抽出数据</h2>
+<p>学习如何使用Scrapy抽出数据，可以使用自带的<a href="https://docs.scrapy.org/en/latest/topics/shell.html#topics-shell">Scrapy shell</a>，来学习使用<code>selectors</code>。</p>
+<pre><code class="language-cmd">scrapy shell 'http://quotes.toscrape.com/page/1/'
+</code></pre>
+<p>会出现类似如下的结果：</p>
+<pre><code>[s] Available Scrapy objects:
+[s]   scrapy     scrapy module (contains scrapy.Request, scrapy.Selector, etc)
+[s]   crawler    &lt;scrapy.crawler.Crawler object at 0x7f3f53d61100&gt;
+[s]   item       {}
+[s]   request    &lt;GET http://quotes.toscrape.com/page/1/&gt;
+[s]   response   &lt;200 http://quotes.toscrape.com/page/1/&gt;
+[s]   settings   &lt;scrapy.settings.Settings object at 0x7f3f53d5dca0&gt;
+[s]   spider     &lt;DefaultSpider 'default' at 0x7f3f538bfe20&gt;
+[s] Useful shortcuts:
+[s]   fetch(url[, redirect=True]) Fetch URL and update local objects (by default, redirects are followed)
+[s]   fetch(req)                  Fetch a scrapy.Request and update local objects 
+[s]   shelp()           Shell help (print this help)
+[s]   view(response)    View response in a browser
+</code></pre>
+<p>这时我们就可以在<code>&gt;&gt;&gt;</code>后面输入指令进行操作了。</p>
+<pre><code>&gt;&gt;&gt; response.css('title')
+&gt;&gt;&gt; response.css('title::text').getall()
+&gt;&gt;&gt; response.css('title').getall()
+</code></pre>
+<p>这三个css选择指令主要有两个区别：</p>
+<ol>
+<li>在<code>title</code>之后添加了<code>::text</code>，这样我们可以只取得元素中的文本，而不是整个元素</li>
+<li><code>getall()</code>方法。因为选择器可能返回不止一个元素，因此这里是一个list。当我们只需要第一个结果的时候，可以使用以下两种方法</li>
+</ol>
+<pre><code>&gt;&gt;&gt; response.css('title::text').get()
+&gt;&gt;&gt; response.css('title::text')[0].get()
+</code></pre>
+<p>但是使用<code>get()</code>的时候如果没有匹配会返回<code>none</code>，可能影响进一步处理。</p>
+<p>除了<code>get()</code>和<code>getall()</code>之外，还可以使用<code>re()</code>来使用正则表达式</p>
+<pre><code>&gt;&gt;&gt; response.css('title::text').re(r'Quotes.*')
+['Quotes to Scrape']
+&gt;&gt;&gt; response.css('title::text').re(r'Q\w+')
+['Quotes']
+&gt;&gt;&gt; response.css('title::text').re(r'(\w+) to (\w+)')
+['Quotes', 'Scrape']
+</code></pre>
+<p>可以使用<code>view(response)</code>取浏览器确认css选择器</p>
+<blockquote>
+<p>另外，<a href="https://selectorgadget.com/">Selector Gadget</a> is also a nice tool to quickly find CSS selector for visually selected elements, which works in many browsers.</p>
+</blockquote>
+<h3 id="xpath简介">Xpath：简介</h3>
+<p>除了css选择，Scrapy也支持Xpath选择</p>
+<pre><code class="language-cmd">&gt;&gt;&gt; response.xpath('//title')
+[&lt;Selector xpath='//title' data='&lt;title&gt;Quotes to Scrape&lt;/title&gt;'&gt;]
+&gt;&gt;&gt; response.xpath('//title/text()').get()
+'Quotes to Scrape'
+</code></pre>
+<p>Xpath非常牛逼，所以如果需要继续学习，请参考：</p>
+<ol>
+<li><a href="https://docs.scrapy.org/en/latest/topics/selectors.html#topics-selectors">Using XPath with Scrapy Selectors</a></li>
+<li><a href="http://zvon.org/comp/r/tut-XPath_1.html">Learn XPath through examples</a></li>
+<li><a href="http://plasmasturm.org/log/xpath101/">Learn “how to think in XPath”</a></li>
+</ol>
+<h2 id="5-提取quotes和authors">5. 提取quotes和authors</h2>
+<p>我们使用css选择器的进行示例：</p>
+<pre><code class="language-cmd">quote = response.css(&quot;div.quote&quot;)[0]
+text = quote.css(&quot;span.text::text&quot;).get()
+author = quote.css(&quot;small.author::text&quot;).get()
+tags = quote.css(&quot;div.tags a.tag::text&quot;).getall()
+</code></pre>
+<p>先取得整个quote的div，在div内再获取text、author、tags。</p>
+<p>搞懂了怎么提取每一个quote，我们就可以使用一个for循环将每一个div都提取出需要的信息之后存进一个字典里。</p>
+<pre><code class="language-cmd">&gt;&gt;&gt; for quote in response.css(&quot;div.quote&quot;):
+...     text = quote.css(&quot;span.text::text&quot;).get()
+...     author = quote.css(&quot;small.author::text&quot;).get()
+...     tags = quote.css(&quot;div.tags a.tag::text&quot;).getall()
+...     print(dict(text=text, author=author, tags=tags))
+</code></pre>
+<h3 id="编写spider">编写spider</h3>
+<pre><code class="language-python">import scrapy
+
+
+class QuotesSpider(scrapy.Spider):
+    name = &quot;quotes&quot;
+    start_urls = [
+        'http://quotes.toscrape.com/page/1/',
+        'http://quotes.toscrape.com/page/2/',
+    ]
+
+    def parse(self, response):
+        for quote in response.css('div.quote'):
+            yield {
+                'text': quote.css('span.text::text').get(),
+                'author': quote.css('small.author::text').get(),
+                'tags': quote.css('div.tags a.tag::text').getall(),
+            }
+</code></pre>
+<p>这里使用了yield语句实现，详细可以取查看官方文档</p>
+<h2 id="6保存提取的数据">6.保存提取的数据</h2>
+<p>最简单的方法就是使用Scrapy自带的<a href="https://docs.scrapy.org/en/latest/topics/feed-exports.html#topics-feed-exports">Feed exports</a></p>
+<pre><code class="language-cmd">scrapy crawl quotes -o quotes.json
+</code></pre>
+<p>这个方法支持<code>json</code>,<code>jsonlines</code>,<code>csv</code>,<code>xml</code>格式的导出。</p>
+<p>在小的项目中，这个方法应该就足够了。但是对于更加复杂的爬虫，推荐自己写<a href="https://docs.scrapy.org/en/latest/topics/item-pipeline.html#topics-item-pipeline">Item Pipeline</a>来执行。</p>
+<h2 id="7如何爬去接下来的页面">7.如何爬去接下来的页面</h2>
+<p>大多数时候我们不仅需要第一页的内容，我们还需要爬取所有页面中的信息。比如说豆瓣电影top250。</p>
+<p>首先我们在页面的最下方找到了next按钮，为了跳转到下一页，我们需要提取<code>a</code>元素的，<code>href</code>属性的值。</p>
+<pre><code class="language-python">import scrapy
+
+
+class QuotesSpider(scrapy.Spider):
+    name = &quot;quotes&quot;
+    start_urls = [
+        'http://quotes.toscrape.com/page/1/',
+    ]
+
+    def parse(self, response):
+        for quote in response.css('div.quote'):
+            yield {
+                'text': quote.css('span.text::text').get(),
+                'author': quote.css('small.author::text').get(),
+                'tags': quote.css('div.tags a.tag::text').getall(),
+            }
+
+        next_page = response.xpath('//li/a/@href').get()
+
+        if next_page is not None:
+            next_page = response.urljoin(next_page)
+            yield scrapy.Request(next_page, callback=self.parse)
+</code></pre>
+<p>这里使用<code>urljoin()</code>的方法构建了完整的链接<strong>需要继续学习的部分</strong></p>
+<h3 id="一个创建requests的便捷方法">一个创建requests的便捷方法</h3>
+<pre><code class="language-python">if next_page is not None:
+    yield response.follow(next_page, callback=self.parse)
+</code></pre>
+<p>这里使用<code>response.follow()</code>的方法就不需要使用<code>url.join()</code></p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[暑假即将结束，毕业论文还没有动笔]]></title>
+        <id>https://poemDead.github.io/post/shu-jia-ji-jiang-jie-shu-bi-ye-lun-wen-huan-mei-you-dong-bi/</id>
+        <link href="https://poemDead.github.io/post/shu-jia-ji-jiang-jie-shu-bi-ye-lun-wen-huan-mei-you-dong-bi/">
+        </link>
+        <updated>2020-08-29T06:31:20.000Z</updated>
+        <content type="html"><![CDATA[<p>还有十天左右就要提交中间报告书给学校了，可是我的论文依然没有开始动笔。实在是让我无比焦虑，每次都说要开始写可以翻看论文，思索许久之后依然是一个字写不出来。今天必须得赶紧开始了。希望在这个周末可以写一个大概的初稿交给老师。然后下周进行修改之后提交给学校。目标1000字的报告书，研究内容的东西能写多少写多少到ppt里先进行留存。现在开始针对读过的论文都要记录笔记在ppt里面，不能再读完就忘了。</p>
+]]></content>
+    </entry>
+</feed>

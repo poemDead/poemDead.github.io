@@ -1,0 +1,430 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Scrapy官方文档教程 | Gridea</title>
+<link rel="shortcut icon" href="https://poemDead.github.io/favicon.ico?v=1613457227830">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://poemDead.github.io/styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="Scrapy官方文档教程 | Gridea - Atom Feed" href="https://poemDead.github.io/atom.xml">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
+
+
+
+    <meta name="description" content="Scrapy Tutorial 官方网站教程
+
+目标是爬取quotes.toscrape.com
+
+主要任务
+
+创建一个新的Scrapy项目
+写一个Spider来爬取网站并导出数据
+使用命令行来导出爬取到的数据
+修改爬虫来递归爬取接下来的
+..." />
+    <meta name="keywords" content="" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+    <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+  </head>
+  <body>
+    <div class="main">
+      <div class="main-content">
+        <div class="site-header">
+  <a href="https://poemDead.github.io">
+  <img class="avatar" src="https://poemDead.github.io/images/avatar.png?v=1613457227830" alt="">
+  </a>
+  <h1 class="site-title">
+    Gridea
+  </h1>
+  <p class="site-description">
+    温故而知新
+  </p>
+  <div class="menu-container">
+    
+      
+        <a href="/" class="menu">
+          首页
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu">
+          归档
+        </a>
+      
+    
+      
+        <a href="/tags" class="menu">
+          标签
+        </a>
+      
+    
+      
+        <a href="/post/about" class="menu">
+          关于
+        </a>
+      
+    
+  </div>
+  <div class="social-container">
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+</div>
+
+        <div class="post-detail">
+          <article class="post">
+            <h2 class="post-title">
+              Scrapy官方文档教程
+            </h2>
+            <div class="post-info">
+              <span>
+                2020-09-06
+              </span>
+              <span>
+                9 min read
+              </span>
+              
+            </div>
+            
+            <div class="post-content-wrapper">
+              <div class="post-content">
+                <h1 id="scrapy-tutorial-官方网站教程">Scrapy Tutorial 官方网站教程</h1>
+<blockquote>
+<p>目标是爬取quotes.toscrape.com</p>
+</blockquote>
+<h2 id="主要任务">主要任务</h2>
+<ol>
+<li>创建一个新的Scrapy项目</li>
+<li>写一个Spider来爬取网站并导出数据</li>
+<li>使用命令行来导出爬取到的数据</li>
+<li>修改爬虫来递归爬取接下来的</li>
+<li>学会使用Spider的参数</li>
+</ol>
+<h2 id="1-创建scrapy项目">1. 创建Scrapy项目</h2>
+<pre><code>scrapy startproject tutorial
+</code></pre>
+<p>这时的目录结构是这样的</p>
+<pre><code>.
+├── scrapy.cfg
+└── tutorial
+    ├── __init__.py
+    ├── items.py
+    ├── middlewares.py
+    ├── pipelines.py
+    ├── settings.py
+    └── spiders
+        └── __init__.py
+</code></pre>
+<blockquote>
+<p>插播一下，如何实现这样的目录结构。在terminal之中先使用sudo apt-get install tree安装tree这个指令，最后在目标目录里使用tree即可</p>
+</blockquote>
+<h2 id="2我们的第一个spider">2.我们的第一个Spider</h2>
+<p>Spider是你定义的类，Scrapy会使用Spider来爬取对应网站的信息。</p>
+<p>你创建的Spider必须继承自Spider类，指定一开始的request请求的，以及如何处理取得的页面信息并取出需要的数据。</p>
+<p>第一个Spider的代码。请保存在<code>tutorial/spiders</code>文件夹下的<code>quotes_spider.py</code>文件里。</p>
+<pre><code class="language-python">import scrapy
+
+
+class QuotesSpider(scrapy.Spider):
+    name = &quot;quotes&quot;
+
+    def start_requests(self):
+        urls = [
+            'http://quotes.toscrape.com/page/1/',
+            'http://quotes.toscrape.com/page/2/',
+        ]
+        for url in urls:
+            yield scrapy.Request(url=url, callback=self.parse)
+
+    def parse(self, response):
+        page = response.url.split(&quot;/&quot;)[-2]
+        filename = 'quotes-%s.html' % page
+        with open(filename, 'wb') as f:
+            f.write(response.body)
+        self.log('Saved file %s' % filename)
+</code></pre>
+<ol>
+<li>首先我们继承自<code>scrapy.Spider</code>，其次我们定义了一些属性和方法。</li>
+<li><code>name</code>用来命名Spider。在一个Scrapy项目内必须独一无二。</li>
+<li><code>start_requests</code>包含一系列让Spider进行爬取的Requests地址。随后的请求会从这些起始地址中继续生成。</li>
+<li><code>parse()</code>是一个用来处理每一个response downloaded。它的参数是<code>TextResponse</code>的一个实例。主要负责抓取页面内容并且提供了一系列用来处理内容的方法。<code>parse()</code>方法通常用来解析响应，提取数据为字典，并且寻找新的Urls，创建新的requests</li>
+</ol>
+<h2 id="3-如何运行我们的spider">3. 如何运行我们的Spider</h2>
+<p>在项目目录的最顶层（<code>tutorial/</code>），运行以下代码:</p>
+<pre><code>scrapy crawl quotes
+</code></pre>
+<blockquote>
+<p>这里注意Spider的文件名是<code>quotes_spider.py</code>但Spider自己的名字是我们在代码中定义的<code>name</code>,也就是<code>quotes</code>。所以这里的指令也使用<code>quotes</code>。<br>
+运行之后会得到类似以下的输出：</p>
+</blockquote>
+<pre><code class="language-cmd">2020-09-07 11:00:17 [scrapy.core.engine] INFO: Spider closed (finished)
+</code></pre>
+<p>目录内会出现<code>quotes-1.html</code>和<code>quotes-2.html</code>两个文件。（这次我们还没有对html本身进行解析，之后会讲到的）</p>
+<h3 id="刚才发生了什么">刚才发生了什么？</h3>
+<p>Scrapy调用<code>start_quests</code>方法返回<code>scrapy.Request</code>对象。收到每一个response时，实例化response对象并调用关联的回调方法（此处为<code>parse()</code>），并将response作为参数传递。</p>
+<h3 id="start_requests的一个快捷方法">start_requests的一个快捷方法</h3>
+<p>现在，我们使用<code>start_requests</code>方法用urls生成了<code>scrapy.Request</code>的对象。</p>
+<p>但我们也可以直接定义一个<code>start_urls</code>的属性，包含一个urls的list。它会作为默认的<code>start_requests</code>来开始请求。</p>
+<pre><code class="language-python">import scrapy
+
+
+class QuotesSpider(scrapy.Spider):
+    name = &quot;quotes&quot;
+    start_urls = [
+        'http://quotes.toscrape.com/page/1/',
+        'http://quotes.toscrape.com/page/2/',
+    ]
+
+    def parse(self, response):
+        page = response.url.split(&quot;/&quot;)[-2]
+        filename = 'quotes-%s.html' % page
+        with open(filename, 'wb') as f:
+            f.write(response.body)
+</code></pre>
+<p>随后<code>parse()</code>会默默处理每一个请求。因为它是scrapy的默认callback方法。</p>
+<h2 id="4-抽出数据">4. 抽出数据</h2>
+<p>学习如何使用Scrapy抽出数据，可以使用自带的<a href="https://docs.scrapy.org/en/latest/topics/shell.html#topics-shell">Scrapy shell</a>，来学习使用<code>selectors</code>。</p>
+<pre><code class="language-cmd">scrapy shell 'http://quotes.toscrape.com/page/1/'
+</code></pre>
+<p>会出现类似如下的结果：</p>
+<pre><code>[s] Available Scrapy objects:
+[s]   scrapy     scrapy module (contains scrapy.Request, scrapy.Selector, etc)
+[s]   crawler    &lt;scrapy.crawler.Crawler object at 0x7f3f53d61100&gt;
+[s]   item       {}
+[s]   request    &lt;GET http://quotes.toscrape.com/page/1/&gt;
+[s]   response   &lt;200 http://quotes.toscrape.com/page/1/&gt;
+[s]   settings   &lt;scrapy.settings.Settings object at 0x7f3f53d5dca0&gt;
+[s]   spider     &lt;DefaultSpider 'default' at 0x7f3f538bfe20&gt;
+[s] Useful shortcuts:
+[s]   fetch(url[, redirect=True]) Fetch URL and update local objects (by default, redirects are followed)
+[s]   fetch(req)                  Fetch a scrapy.Request and update local objects 
+[s]   shelp()           Shell help (print this help)
+[s]   view(response)    View response in a browser
+</code></pre>
+<p>这时我们就可以在<code>&gt;&gt;&gt;</code>后面输入指令进行操作了。</p>
+<pre><code>&gt;&gt;&gt; response.css('title')
+&gt;&gt;&gt; response.css('title::text').getall()
+&gt;&gt;&gt; response.css('title').getall()
+</code></pre>
+<p>这三个css选择指令主要有两个区别：</p>
+<ol>
+<li>在<code>title</code>之后添加了<code>::text</code>，这样我们可以只取得元素中的文本，而不是整个元素</li>
+<li><code>getall()</code>方法。因为选择器可能返回不止一个元素，因此这里是一个list。当我们只需要第一个结果的时候，可以使用以下两种方法</li>
+</ol>
+<pre><code>&gt;&gt;&gt; response.css('title::text').get()
+&gt;&gt;&gt; response.css('title::text')[0].get()
+</code></pre>
+<p>但是使用<code>get()</code>的时候如果没有匹配会返回<code>none</code>，可能影响进一步处理。</p>
+<p>除了<code>get()</code>和<code>getall()</code>之外，还可以使用<code>re()</code>来使用正则表达式</p>
+<pre><code>&gt;&gt;&gt; response.css('title::text').re(r'Quotes.*')
+['Quotes to Scrape']
+&gt;&gt;&gt; response.css('title::text').re(r'Q\w+')
+['Quotes']
+&gt;&gt;&gt; response.css('title::text').re(r'(\w+) to (\w+)')
+['Quotes', 'Scrape']
+</code></pre>
+<p>可以使用<code>view(response)</code>取浏览器确认css选择器</p>
+<blockquote>
+<p>另外，<a href="https://selectorgadget.com/">Selector Gadget</a> is also a nice tool to quickly find CSS selector for visually selected elements, which works in many browsers.</p>
+</blockquote>
+<h3 id="xpath简介">Xpath：简介</h3>
+<p>除了css选择，Scrapy也支持Xpath选择</p>
+<pre><code class="language-cmd">&gt;&gt;&gt; response.xpath('//title')
+[&lt;Selector xpath='//title' data='&lt;title&gt;Quotes to Scrape&lt;/title&gt;'&gt;]
+&gt;&gt;&gt; response.xpath('//title/text()').get()
+'Quotes to Scrape'
+</code></pre>
+<p>Xpath非常牛逼，所以如果需要继续学习，请参考：</p>
+<ol>
+<li><a href="https://docs.scrapy.org/en/latest/topics/selectors.html#topics-selectors">Using XPath with Scrapy Selectors</a></li>
+<li><a href="http://zvon.org/comp/r/tut-XPath_1.html">Learn XPath through examples</a></li>
+<li><a href="http://plasmasturm.org/log/xpath101/">Learn “how to think in XPath”</a></li>
+</ol>
+<h2 id="5-提取quotes和authors">5. 提取quotes和authors</h2>
+<p>我们使用css选择器的进行示例：</p>
+<pre><code class="language-cmd">quote = response.css(&quot;div.quote&quot;)[0]
+text = quote.css(&quot;span.text::text&quot;).get()
+author = quote.css(&quot;small.author::text&quot;).get()
+tags = quote.css(&quot;div.tags a.tag::text&quot;).getall()
+</code></pre>
+<p>先取得整个quote的div，在div内再获取text、author、tags。</p>
+<p>搞懂了怎么提取每一个quote，我们就可以使用一个for循环将每一个div都提取出需要的信息之后存进一个字典里。</p>
+<pre><code class="language-cmd">&gt;&gt;&gt; for quote in response.css(&quot;div.quote&quot;):
+...     text = quote.css(&quot;span.text::text&quot;).get()
+...     author = quote.css(&quot;small.author::text&quot;).get()
+...     tags = quote.css(&quot;div.tags a.tag::text&quot;).getall()
+...     print(dict(text=text, author=author, tags=tags))
+</code></pre>
+<h3 id="编写spider">编写spider</h3>
+<pre><code class="language-python">import scrapy
+
+
+class QuotesSpider(scrapy.Spider):
+    name = &quot;quotes&quot;
+    start_urls = [
+        'http://quotes.toscrape.com/page/1/',
+        'http://quotes.toscrape.com/page/2/',
+    ]
+
+    def parse(self, response):
+        for quote in response.css('div.quote'):
+            yield {
+                'text': quote.css('span.text::text').get(),
+                'author': quote.css('small.author::text').get(),
+                'tags': quote.css('div.tags a.tag::text').getall(),
+            }
+</code></pre>
+<p>这里使用了yield语句实现，详细可以取查看官方文档</p>
+<h2 id="6保存提取的数据">6.保存提取的数据</h2>
+<p>最简单的方法就是使用Scrapy自带的<a href="https://docs.scrapy.org/en/latest/topics/feed-exports.html#topics-feed-exports">Feed exports</a></p>
+<pre><code class="language-cmd">scrapy crawl quotes -o quotes.json
+</code></pre>
+<p>这个方法支持<code>json</code>,<code>jsonlines</code>,<code>csv</code>,<code>xml</code>格式的导出。</p>
+<p>在小的项目中，这个方法应该就足够了。但是对于更加复杂的爬虫，推荐自己写<a href="https://docs.scrapy.org/en/latest/topics/item-pipeline.html#topics-item-pipeline">Item Pipeline</a>来执行。</p>
+<h2 id="7如何爬去接下来的页面">7.如何爬去接下来的页面</h2>
+<p>大多数时候我们不仅需要第一页的内容，我们还需要爬取所有页面中的信息。比如说豆瓣电影top250。</p>
+<p>首先我们在页面的最下方找到了next按钮，为了跳转到下一页，我们需要提取<code>a</code>元素的，<code>href</code>属性的值。</p>
+<pre><code class="language-python">import scrapy
+
+
+class QuotesSpider(scrapy.Spider):
+    name = &quot;quotes&quot;
+    start_urls = [
+        'http://quotes.toscrape.com/page/1/',
+    ]
+
+    def parse(self, response):
+        for quote in response.css('div.quote'):
+            yield {
+                'text': quote.css('span.text::text').get(),
+                'author': quote.css('small.author::text').get(),
+                'tags': quote.css('div.tags a.tag::text').getall(),
+            }
+
+        next_page = response.xpath('//li/a/@href').get()
+
+        if next_page is not None:
+            next_page = response.urljoin(next_page)
+            yield scrapy.Request(next_page, callback=self.parse)
+</code></pre>
+<p>这里使用<code>urljoin()</code>的方法构建了完整的链接<strong>需要继续学习的部分</strong></p>
+<h3 id="一个创建requests的便捷方法">一个创建requests的便捷方法</h3>
+<pre><code class="language-python">if next_page is not None:
+    yield response.follow(next_page, callback=self.parse)
+</code></pre>
+<p>这里使用<code>response.follow()</code>的方法就不需要使用<code>url.join()</code></p>
+
+              </div>
+              <div class="toc-container">
+                <ul class="markdownIt-TOC">
+<li><a href="#scrapy-tutorial-%E5%AE%98%E6%96%B9%E7%BD%91%E7%AB%99%E6%95%99%E7%A8%8B">Scrapy Tutorial 官方网站教程</a>
+<ul>
+<li><a href="#%E4%B8%BB%E8%A6%81%E4%BB%BB%E5%8A%A1">主要任务</a></li>
+<li><a href="#1-%E5%88%9B%E5%BB%BAscrapy%E9%A1%B9%E7%9B%AE">1. 创建Scrapy项目</a></li>
+<li><a href="#2%E6%88%91%E4%BB%AC%E7%9A%84%E7%AC%AC%E4%B8%80%E4%B8%AAspider">2.我们的第一个Spider</a></li>
+<li><a href="#3-%E5%A6%82%E4%BD%95%E8%BF%90%E8%A1%8C%E6%88%91%E4%BB%AC%E7%9A%84spider">3. 如何运行我们的Spider</a>
+<ul>
+<li><a href="#%E5%88%9A%E6%89%8D%E5%8F%91%E7%94%9F%E4%BA%86%E4%BB%80%E4%B9%88">刚才发生了什么？</a></li>
+<li><a href="#start_requests%E7%9A%84%E4%B8%80%E4%B8%AA%E5%BF%AB%E6%8D%B7%E6%96%B9%E6%B3%95">start_requests的一个快捷方法</a></li>
+</ul>
+</li>
+<li><a href="#4-%E6%8A%BD%E5%87%BA%E6%95%B0%E6%8D%AE">4. 抽出数据</a>
+<ul>
+<li><a href="#xpath%E7%AE%80%E4%BB%8B">Xpath：简介</a></li>
+</ul>
+</li>
+<li><a href="#5-%E6%8F%90%E5%8F%96quotes%E5%92%8Cauthors">5. 提取quotes和authors</a>
+<ul>
+<li><a href="#%E7%BC%96%E5%86%99spider">编写spider</a></li>
+</ul>
+</li>
+<li><a href="#6%E4%BF%9D%E5%AD%98%E6%8F%90%E5%8F%96%E7%9A%84%E6%95%B0%E6%8D%AE">6.保存提取的数据</a></li>
+<li><a href="#7%E5%A6%82%E4%BD%95%E7%88%AC%E5%8E%BB%E6%8E%A5%E4%B8%8B%E6%9D%A5%E7%9A%84%E9%A1%B5%E9%9D%A2">7.如何爬去接下来的页面</a>
+<ul>
+<li><a href="#%E4%B8%80%E4%B8%AA%E5%88%9B%E5%BB%BArequests%E7%9A%84%E4%BE%BF%E6%8D%B7%E6%96%B9%E6%B3%95">一个创建requests的便捷方法</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+              </div>
+            </div>
+          </article>
+        </div>
+
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="https://poemDead.github.io/post/shu-jia-ji-jiang-jie-shu-bi-ye-lun-wen-huan-mei-you-dong-bi/">
+              <h3 class="post-title">
+                暑假即将结束，毕业论文还没有动笔
+              </h3>
+            </a>
+          </div>
+        
+
+        
+
+        <div class="site-footer">
+  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>
+  <a class="rss" href="https://poemDead.github.io/atom.xml" target="_blank">
+    <i class="ri-rss-line"></i> RSS
+  </a>
+</div>
+
+      </div>
+    </div>
+
+    <script>
+      hljs.initHighlightingOnLoad()
+
+      let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+      // This should probably be throttled.
+      // Especially because it triggers during smooth scrolling.
+      // https://lodash.com/docs/4.17.10#throttle
+      // You could do like...
+      // window.addEventListener("scroll", () => {
+      //    _.throttle(doThatStuff, 100);
+      // });
+      // Only not doing it here to keep this Pen dependency-free.
+
+      window.addEventListener("scroll", event => {
+        let fromTop = window.scrollY;
+
+        mainNavLinks.forEach((link, index) => {
+          let section = document.getElementById(decodeURI(link.hash).substring(1));
+          let nextSection = null
+          if (mainNavLinks[index + 1]) {
+            nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+          }
+          if (section.offsetTop <= fromTop) {
+            if (nextSection) {
+              if (nextSection.offsetTop > fromTop) {
+                link.classList.add("current");
+              } else {
+                link.classList.remove("current");    
+              }
+            } else {
+              link.classList.add("current");
+            }
+          } else {
+            link.classList.remove("current");
+          }
+        });
+      });
+
+    </script>
+  </body>
+</html>
