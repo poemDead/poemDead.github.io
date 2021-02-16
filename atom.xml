@@ -1,22 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://poemDead.github.io</id>
-    <title>Gridea</title>
-    <updated>2021-02-16T06:33:49.918Z</updated>
+    <title>Pig with coffee</title>
+    <updated>2021-02-16T06:37:15.414Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://poemDead.github.io"/>
     <link rel="self" href="https://poemDead.github.io/atom.xml"/>
-    <subtitle>温故而知新</subtitle>
+    <subtitle>随便写点什么</subtitle>
     <logo>https://poemDead.github.io/images/avatar.png</logo>
     <icon>https://poemDead.github.io/favicon.ico</icon>
-    <rights>All rights reserved 2021, Gridea</rights>
+    <rights>All rights reserved 2021, Pig with coffee</rights>
     <entry>
         <title type="html"><![CDATA[2020年入秋了]]></title>
         <id>https://poemDead.github.io/post/2020-nian-ru-qiu-liao/</id>
         <link href="https://poemDead.github.io/post/2020-nian-ru-qiu-liao/">
         </link>
         <updated>2020-09-06T06:32:27.000Z</updated>
+        <summary type="html"><![CDATA[<p>9月的第一个周末，害怕疫情自我隔离了无数天之后，总算是出门放了放风。（其实是因为论文的中期报告书没写完）</p>
+]]></summary>
         <content type="html"><![CDATA[<p>9月的第一个周末，害怕疫情自我隔离了无数天之后，总算是出门放了放风。（其实是因为论文的中期报告书没写完）</p>
+<!-- more -->
+<p>9月的第一个周末，害怕疫情自我隔离了无数天之后，总算是出门放了放风。（其实是因为论文的中期报告书没写完）</p>
 <p>周五总算是写了一份凑活的中期报告书交给了老师，焦虑转移成功。突然就是一身轻。晚上和老婆吃着711的炸鸡和uber eats点来的麻辣烫看了新的一期脱口秀大会。王勉的音乐脱口秀确实是非常牛逼，但是音乐真的是他的表演微不足道的一个特点，最根本的强大还是因为内容本身的优秀让大多数人可以产生共鸣。在那之上，配合上音乐和表演让段子的力量放大了很多倍。这场我觉得最亏的就是豆豆，豆豆的表演我真的很喜欢，非常全面，很能带动大家的情绪，可惜分在死亡之组，一票之差进入待定，还得再比一场太累了。反之，庞博那组着实有一点水了。</p>
 <p>周六和老婆去隔壁的隔壁车站的锦系町逛街，先是优衣库补充衣服，后来又去MUJI惯例补货。不得不说的是，MUJI咖啡厅的饭确实不错，价格没有很贵，味道都让人很满意。我老婆一个不爱吃内脏的人，意外的喜欢他家的鸡肝魔芋。打算回家后好好查查食谱，试图在家复刻一下。</p>
 <p>逛到8点多回家，到了车站之后居然下起了大暴雨。还好岛国的雨来也匆匆去也匆匆，刚开始看着车站外头的雨大得像是影视剧里洒水车洒出来似的，不过20分钟就已经几乎停了。</p>
@@ -30,6 +34,19 @@
         <link href="https://poemDead.github.io/post/scrapy-guan-fang-wen-dang-jiao-cheng/">
         </link>
         <updated>2020-09-06T06:30:29.000Z</updated>
+        <summary type="html"><![CDATA[<h1 id="scrapy-tutorial-官方网站教程">Scrapy Tutorial 官方网站教程</h1>
+<blockquote>
+<p>目标是爬取quotes.toscrape.com</p>
+</blockquote>
+<h2 id="主要任务">主要任务</h2>
+<ol>
+<li>创建一个新的Scrapy项目</li>
+<li>写一个Spider来爬取网站并导出数据</li>
+<li>使用命令行来导出爬取到的数据</li>
+<li>修改爬虫来递归爬取接下来的</li>
+<li>学会使用Spider的参数</li>
+</ol>
+]]></summary>
         <content type="html"><![CDATA[<h1 id="scrapy-tutorial-官方网站教程">Scrapy Tutorial 官方网站教程</h1>
 <blockquote>
 <p>目标是爬取quotes.toscrape.com</p>
@@ -42,6 +59,7 @@
 <li>修改爬虫来递归爬取接下来的</li>
 <li>学会使用Spider的参数</li>
 </ol>
+<!-- more -->
 <h2 id="1-创建scrapy项目">1. 创建Scrapy项目</h2>
 <pre><code>scrapy startproject tutorial
 </code></pre>
@@ -263,7 +281,11 @@ class QuotesSpider(scrapy.Spider):
         <link href="https://poemDead.github.io/post/shu-jia-ji-jiang-jie-shu-bi-ye-lun-wen-huan-mei-you-dong-bi/">
         </link>
         <updated>2020-08-29T06:31:20.000Z</updated>
-        <content type="html"><![CDATA[<p>还有十天左右就要提交中间报告书给学校了，可是我的论文依然没有开始动笔。实在是让我无比焦虑，每次都说要开始写可以翻看论文，思索许久之后依然是一个字写不出来。今天必须得赶紧开始了。希望在这个周末可以写一个大概的初稿交给老师。然后下周进行修改之后提交给学校。目标1000字的报告书，研究内容的东西能写多少写多少到ppt里先进行留存。现在开始针对读过的论文都要记录笔记在ppt里面，不能再读完就忘了。</p>
+        <summary type="html"><![CDATA[<p>还有十天左右就要提交中间报告书给学校了，可是我的论文依然没有开始动笔。实在是让我无比焦虑，每次都说要开始写可以翻看论文，思索许久之后依然是一个字写不出来。</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>还有十天左右就要提交中间报告书给学校了，可是我的论文依然没有开始动笔。实在是让我无比焦虑，每次都说要开始写可以翻看论文，思索许久之后依然是一个字写不出来。</p>
+<!-- more -->
+<p>今天必须得赶紧开始了。希望在这个周末可以写一个大概的初稿交给老师。然后下周进行修改之后提交给学校。目标1000字的报告书，研究内容的东西能写多少写多少到ppt里先进行留存。现在开始针对读过的论文都要记录笔记在ppt里面，不能再读完就忘了。</p>
 ]]></content>
     </entry>
 </feed>
