@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="John Doe">
+
+
+
+    <meta name="description" content="住在日本东京，写点博客记录生活。">
+
+
+
+
+
+<title>Dify v0.10.1之后的一个小bug处理 | Taku&#39;s Blog</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&family=Roboto+Mono&display=swap');
+</style>
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/menu.js"></script>
+    
+
+
+
+
+
+
+
+
+
+
+  <meta name="generator" content="Hexo 7.3.0"></head>
+  <body>
+    <div class="mask-border">
+    </div>
+
+    <div class="wrapper">
+
+      <div class="header">
+  <div class="flex-container">
+    <div class="header-inner">
+      <div class="site-brand-container">
+        <a href="/">
+          
+            Taku&#39;s Blog
+          
+        </a>
+      </div>
+      <div id="menu-btn" class="menu-btn" onclick="toggleMenu()">
+        Menu
+      </div>
+      <nav class="site-nav">
+        <ul class="menu-list">
+          
+            
+              <li class="menu-item">
+                <a href="/">Home</a>
+              </li> 
+                   
+          
+            
+              <li class="menu-item">
+                <a href="/now/">Now</a>
+              </li> 
+                   
+          
+            
+              <li class="menu-item">
+                <a href="/archives/">Blog</a>
+              </li> 
+                   
+          
+            
+              <li class="menu-item">
+                <a href="/categories/gallery/">Gallery</a>
+              </li> 
+                   
+          
+          
+        </ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+      <div class="main">
+        <div class="flex-container">
+          <article id="post">
+
+  
+    <div class="post-head">
+    <div class="post-info">
+        <div class="tag-list">
+            
+        </div>
+        <div class="post-title">
+            
+            
+                Dify v0.10.1之后的一个小bug处理
+            
+            
+        </div>
+        <span class="post-date">
+            Oct 29, 2024
+        </span>
+    </div>
+    <div class="post-img">
+        
+            <div class="h-line-primary"></div>
+              
+    </div>
+</div>
+    <div class="post-content">
+    <p>前几天我把公司的Dify从0.8.x升级到0.10.1版本后，发现了一个问题：工作流Start Node中对inputs的空字段处理方式发生了变化。在旧版本中，当一个可选字段为空时，会将其处理为空字符串(“”)，但升级后这些空字段全都变成了null。</p>
+<p>这个变化直接影响了我们现在使用中的工作流程，导致了后续的node会出现变量无法找到的异常。反正我先修改工作流利用变量赋值节点解决了这个问题。</p>
+<p>但是非常在意到底是什么修改引起了这个变化。这几天百思不得其解，昨天注意到<a target="_blank" rel="noopener" href="https://github.com/langgenius/dify/pull/9584/">#9584</a>的修改中，移除了一个被标记为deprecated的get_any方法，使用新的get方法替代。</p>
+<p>关键的区别在于：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 老的get_any方法 </span></span><br><span class="line"><span class="keyword">return</span> value.to_object() <span class="keyword">if</span> value <span class="keyword">else</span> <span class="literal">None</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 新的get方法 </span></span><br><span class="line"><span class="keyword">return</span> value</span><br></pre></td></tr></table></figure>
+
+<p>我感觉问题是在这里，但是我代码能力有限，还好现在又AI，我先把这部分代码扔给perplexity让他帮分析，他又告诉我需要深入查看了segment的实现后。再把segments的代码扔进去之后，感觉搞清楚了问题所在。</p>
+<p>旧版本中，空输入会被转换为StringSegment并包含一个空字符串，而to_object()方法会直接返回这个空字符串。但在新版本中，空输入被转换成了NoneSegment，当它被使用时，to_object()返回的是None而不是空字符串。</p>
+<p>在Github，我看到也有其他用户相同的问题，但是他被影响了大量工作流，不知道有没有什么快速解决这个问题的办法啊。<br><a target="_blank" rel="noopener" href="https://github.com/langgenius/dify/discussions/9782%E3%80%82">https://github.com/langgenius/dify/discussions/9782。</a></p>
+<p>后续这次修改肯定是没有问题的，但是造成这样的结果是Dify这边也没有预料到的，目前已经在处理中了。<br><a target="_blank" rel="noopener" href="https://github.com/langgenius/dify/discussions/9782#discussioncomment-11081805">https://github.com/langgenius/dify/discussions/9782#discussioncomment-11081805</a></p>
+
+</div> 
+
+<script>
+    window.onload = detectors();
+</script>
+    <div class="post-footer">
+    <div class="h-line-primary"></div>
+    <nav class="post-nav">
+        <div class="prev-item">
+           
+                <div class="icon arrow-left"></div>
+                <div class="post-link">
+                    <a href="/2024/10/29/hello-world/">Prev</a>
+                </div>
+            
+        </div>
+        <div class="next-item">
+            
+                <div class="icon arrow-right"></div>
+                <div class="post-link">
+                  <a href="/2024/10/28/My-First-Post/">Next</a>  
+                </div>  
+            
+        </div>
+    </nav>
+</div>
+
+    
+      <div class="post-comment">
+
+     
+
+     
+    
+    
+
+</div>
+     
+  
+</article>
+        </div>
+      </div>
+      
+      <div class="footer">
+    <div class="flex-container">
+        <div class="footer-text">
+            
+            
+            
+                Powered by <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a> & <a target="_blank" rel="noopener" href="https://github.com/zoeingwingkei/frame/">Frame</a>
+                
+        </div>
+    </div>
+</div>
+
+    </div>
+
+    
+    
+
+  </body>
+</html>
