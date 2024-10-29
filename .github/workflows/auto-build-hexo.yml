@@ -1,4 +1,4 @@
-name: Pages
+name: deploy blog
 on:
   push:
     branches:
@@ -10,8 +10,6 @@ jobs:
       contents: write
     steps:
       - uses: actions/checkout@v4
-        with:
-          submodules: true  # 添加这行以确保子模块被正确克隆
       
       - name: Setup Node.js
         uses: actions/setup-node@v4
