@@ -10,24 +10,41 @@ jobs:
       contents: write
       pages: write
       id-token: write
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - uses: actions/checkout@v4
-      
+
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: '18'
           cache: 'npm'
       
-      - name: Clean and Reinstall
-        run: |
-          rm -rf node_modules
-          npm cache clean --force
-          npm install --force
+      - name: Cache NPM dependencies
+        uses: actions/cache@v3
+        with:
+          path: node_modules
+          key: ${{ runner.OS }}-npm-cache
+          restore-keys: |
+            ${{ runner.OS }}-npm-cache
       
+      - name: Install Dependencies
+        run: |
+          npm install -g hexo-cli
+          npm install --legacy-peer-deps
+          npm install hexo --save
+          npm install hexo-renderer-ejs --save
+          npm install hexo-renderer-marked --save
+          npm install hexo-renderer-stylus --save
+
+      - name: List Files # 调试用
+        run: |
+          echo "Current directory:"
+          ls -la
+          echo "Themes directory:"
+          ls -la themes/
+          echo "Theme files:"
+          ls -la themes/frame/
+
       - name: Install Hexo
         run: |
           npm install hexo-cli -g
@@ -36,8 +53,15 @@ jobs:
       - name: Generate Site
         run: |
           npx hexo clean
-          npx hexo generate
+          npx hexo generate --debug
       
+      - name: Check Generated Files # 调试用
+        run: |
+          echo "Public directory contents:"
+          ls -la public/
+          echo "Sample of HTML file:"
+          cat public/index.html || echo "index.html not found"
+
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v4
         with:
