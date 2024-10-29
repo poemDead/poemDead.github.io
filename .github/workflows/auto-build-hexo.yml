@@ -10,6 +10,10 @@ jobs:
       contents: write
     steps:
       - uses: actions/checkout@v4
+
+      - name: Clean theme git
+        run: |
+          rm -rf themes/frame/.git || true
       
       - name: Setup Node.js
         uses: actions/setup-node@v4
