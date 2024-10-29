@@ -12,8 +12,6 @@ jobs:
       group: ${{ github.workflow }}-${{ github.ref }}
     steps:
       - uses: actions/checkout@v4
-        with:
-          submodules: true
       
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -22,7 +20,7 @@ jobs:
           cache: 'npm'
       
       - name: Install Dependencies
-        run: |
+        run: 
           npm install -g hexo-cli
           npm install
       
