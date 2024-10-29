@@ -8,8 +8,6 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
-    concurrency:
-      group: ${{ github.workflow }}-${{ github.ref }}
     steps:
       - uses: actions/checkout@v4
       
@@ -19,13 +17,21 @@ jobs:
           node-version: '20'
           cache: 'npm'
       
-      - name: Install Dependencies
-        run: 
-          npm install -g hexo-cli
-          npm install
+      - name: Clean and Reinstall
+        run: |
+          rm -rf node_modules
+          npm cache clean --force
+          npm install --force
       
-      - name: Build
-        run: hexo generate
+      - name: Install Hexo
+        run: |
+          npm install hexo-cli -g
+          npm install hexo --save
+      
+      - name: Generate Site
+        run: |
+          npx hexo clean
+          npx hexo generate
       
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v4
