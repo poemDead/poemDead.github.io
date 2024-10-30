@@ -5,15 +5,15 @@
 # Site
 title: Taku's Blog
 subtitle: ''
-description: '住在日本东京，写点博客记录生活。'
+description: '在东京，写点博客记录生活。'
 keywords:
-author: John Doe
+author: ZHAI HANZHANG
 language: zh
 timezone: 'Japan'
 
 # URL
 ## Set your site url here. For example, if you use GitHub Page, set url as 'https://username.github.io/project'
-url: https://poemdead.github.io/
+url: blog.hanzhang.studio
 permalink: :year/:month/:day/:title/
 permalink_defaults:
 pretty_urls:
