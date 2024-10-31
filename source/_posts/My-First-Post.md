@@ -1,5 +1,5 @@
 ---
-title: 用Hexo和GitHub拥有免费，老话题但是不太一样
+title: 用GitHub Pages拥有免费的博客，老话题但是稍微有些不太一样
 date: 2024-10-29 02:57:31
 tags:
 ---
