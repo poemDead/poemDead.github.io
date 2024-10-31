@@ -394,7 +394,7 @@ input[type="search"]::-webkit-search-results-decoration {
   }
 }
 .footer {
-  margin-top: 3.5rem;
+  margin-top: 1.5rem;
   border: 2px #373633 solid;
   font-size: 0.75rem;
   font-weight: 400;
@@ -402,8 +402,8 @@ input[type="search"]::-webkit-search-results-decoration {
   color: #373633;
 }
 .footer .footer-text {
-  margin-top: 2rem;
-  margin-bottom: 3.5rem;
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
 }
 .post-list a {
   background-image: linear-gradient(#fff, #fff), linear-gradient(#373633, #373633);
