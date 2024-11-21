@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="超线性回报：打破线性思维的局限一、理解超线性回报我们从小就被教育”一分耕耘一分收获”，这种线性思维模式深深植根于我们的认知中。然而，Paul Graham在其文章《Superlinear Returns》中提出了一个发人深省的观点：在现实生活中，努力与回报之间的关系往往不是线性的，而是超线性的。 超线性回报打破了传统的”一分耕耘一分收获”的思维定式。在现实中，如果你的产品只有竞争对手的一半好，你获">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Paul Graham的超线性回报">
+<meta property="og:url" content="https://blog.hanzhang.studio/2024/10/31/Paul-Graham%E7%9A%84%E8%B6%85%E7%BA%BF%E6%80%A7%E5%9B%9E%E6%8A%A5/index.html">
+<meta property="og:site_name" content="Hanzhang&#39;s Blog">
+<meta property="og:description" content="超线性回报：打破线性思维的局限一、理解超线性回报我们从小就被教育”一分耕耘一分收获”，这种线性思维模式深深植根于我们的认知中。然而，Paul Graham在其文章《Superlinear Returns》中提出了一个发人深省的观点：在现实生活中，努力与回报之间的关系往往不是线性的，而是超线性的。 超线性回报打破了传统的”一分耕耘一分收获”的思维定式。在现实中，如果你的产品只有竞争对手的一半好，你获">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-10-30T22:55:26.000Z">
+<meta property="article:modified_time" content="2024-11-16T07:02:41.905Z">
+<meta property="article:author" content="ZHAI HANZHANG">
+<meta property="article:tag" content="读书笔记">
+<meta name="twitter:card" content="summary">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>Paul Graham的超线性回报</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="目录"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="目录"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="顶部" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">首页</a></li><!--
+     --><!--
+       --><li><a href="/about/">关于</a></li><!--
+     --><!--
+       --><li><a href="/archives/">归档</a></li><!--
+     --><!--
+       --><li><a href="/">项目</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="上一篇" href="/2024/11/16/%E6%96%87%E7%94%9F%E5%9B%BE%E4%BD%93%E9%AA%8Cpart1-AWPortrait-FL%E6%A8%A1%E5%9E%8B%E5%92%8CShakker/"><i class="fa-solid fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="下一篇" href="/2024/10/29/Dify-v0-10-1%E4%B9%8B%E5%90%8E%E7%9A%84%E4%B8%80%E4%B8%AA%E5%B0%8Fbug%E5%A4%84%E7%90%86/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="返回顶部" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="分享文章" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">上一篇</span>
+      <span id="i-next" class="info" style="display:none;">下一篇</span>
+      <span id="i-top" class="info" style="display:none;">返回顶部</span>
+      <span id="i-share" class="info" style="display:none;">分享文章</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://blog.hanzhang.studio/2024/10/31/Paul-Graham%E7%9A%84%E8%B6%85%E7%BA%BF%E6%80%A7%E5%9B%9E%E6%8A%A5/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://blog.hanzhang.studio/2024/10/31/Paul-Graham%E7%9A%84%E8%B6%85%E7%BA%BF%E6%80%A7%E5%9B%9E%E6%8A%A5/&text=Paul Graham的超线性回报"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://blog.hanzhang.studio/2024/10/31/Paul-Graham%E7%9A%84%E8%B6%85%E7%BA%BF%E6%80%A7%E5%9B%9E%E6%8A%A5/&title=Paul Graham的超线性回报"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://blog.hanzhang.studio/2024/10/31/Paul-Graham%E7%9A%84%E8%B6%85%E7%BA%BF%E6%80%A7%E5%9B%9E%E6%8A%A5/&is_video=false&description=Paul Graham的超线性回报"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Paul Graham的超线性回报&body=Check out this article: https://blog.hanzhang.studio/2024/10/31/Paul-Graham%E7%9A%84%E8%B6%85%E7%BA%BF%E6%80%A7%E5%9B%9E%E6%8A%A5/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://blog.hanzhang.studio/2024/10/31/Paul-Graham%E7%9A%84%E8%B6%85%E7%BA%BF%E6%80%A7%E5%9B%9E%E6%8A%A5/&title=Paul Graham的超线性回报"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://blog.hanzhang.studio/2024/10/31/Paul-Graham%E7%9A%84%E8%B6%85%E7%BA%BF%E6%80%A7%E5%9B%9E%E6%8A%A5/&title=Paul Graham的超线性回报"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://blog.hanzhang.studio/2024/10/31/Paul-Graham%E7%9A%84%E8%B6%85%E7%BA%BF%E6%80%A7%E5%9B%9E%E6%8A%A5/&title=Paul Graham的超线性回报"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://blog.hanzhang.studio/2024/10/31/Paul-Graham%E7%9A%84%E8%B6%85%E7%BA%BF%E6%80%A7%E5%9B%9E%E6%8A%A5/&title=Paul Graham的超线性回报"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://blog.hanzhang.studio/2024/10/31/Paul-Graham%E7%9A%84%E8%B6%85%E7%BA%BF%E6%80%A7%E5%9B%9E%E6%8A%A5/&name=Paul Graham的超线性回报&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://blog.hanzhang.studio/2024/10/31/Paul-Graham%E7%9A%84%E8%B6%85%E7%BA%BF%E6%80%A7%E5%9B%9E%E6%8A%A5/&t=Paul Graham的超线性回报"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    
+    
+      <div id="toc">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%B6%85%E7%BA%BF%E6%80%A7%E5%9B%9E%E6%8A%A5%EF%BC%9A%E6%89%93%E7%A0%B4%E7%BA%BF%E6%80%A7%E6%80%9D%E7%BB%B4%E7%9A%84%E5%B1%80%E9%99%90"><span class="toc-number">1.</span> <span class="toc-text">超线性回报：打破线性思维的局限</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E7%90%86%E8%A7%A3%E8%B6%85%E7%BA%BF%E6%80%A7%E5%9B%9E%E6%8A%A5"><span class="toc-number">1.1.</span> <span class="toc-text">一、理解超线性回报</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E5%A6%82%E4%BD%95%E5%9C%A8%E7%8E%B0%E4%BB%A3%E7%A4%BE%E4%BC%9A%E4%B8%AD%E8%8E%B7%E5%8F%96%E8%B6%85%E7%BA%BF%E6%80%A7%E5%9B%9E%E6%8A%A5"><span class="toc-number">1.2.</span> <span class="toc-text">二、如何在现代社会中获取超线性回报</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E8%B6%85%E7%BA%BF%E6%80%A7%E5%9B%9E%E6%8A%A5%E7%9A%84%E6%9C%BA%E9%81%87%E4%B8%8E%E6%8C%91%E6%88%98"><span class="toc-number">1.3.</span> <span class="toc-text">三、超线性回报的机遇与挑战</span></a></li></ol></li></ol>
+      </div>
+    
+  </span>
+</div>
+
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        Paul Graham的超线性回报
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">ZHAI HANZHANG</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2024-10-30T22:55:26.000Z" class="dt-published" itemprop="datePublished">2024-10-31</time>
+        
+      
+    </div>
+
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fa-solid fa-tag"></i>
+        <a class="p-category" href="/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/" rel="tag">读书笔记</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <h1 id="超线性回报：打破线性思维的局限"><a href="#超线性回报：打破线性思维的局限" class="headerlink" title="超线性回报：打破线性思维的局限"></a>超线性回报：打破线性思维的局限</h1><h2 id="一、理解超线性回报"><a href="#一、理解超线性回报" class="headerlink" title="一、理解超线性回报"></a>一、理解超线性回报</h2><p>我们从小就被教育”一分耕耘一分收获”，这种线性思维模式深深植根于我们的认知中。然而，Paul Graham在其文章《Superlinear Returns》中提出了一个发人深省的观点：在现实生活中，努力与回报之间的关系往往不是线性的，而是超线性的。</p>
+<p>超线性回报打破了传统的”一分耕耘一分收获”的思维定式。在现实中，如果你的产品只有竞争对手的一半好，你获得的市场份额往往不是一半，而可能是微乎其微。这种”赢者通吃”的现象在当今社会中屡见不鲜。</p>
+<p>造成超线性回报的主要有两个因素：一是指数增长（Exponential Growth），即”当你的表现取决于过去的积累时，就会产生指数级的增长”；二是阈值效应（Thresholds），类似于阶跃函数，在达到某个临界点之前，投入似乎没有明显的回报，一旦突破这个阈值，回报可能会突然显现。</p>
+<h2 id="二、如何在现代社会中获取超线性回报"><a href="#二、如何在现代社会中获取超线性回报" class="headerlink" title="二、如何在现代社会中获取超线性回报"></a>二、如何在现代社会中获取超线性回报</h2><p>获取超线性回报的核心原则是”seek work that compounds”（寻找能够产生复利效应的工作）。其中，持续学习是最典型的例子。这里的学习不仅包括知识的积累，还包括从失败中吸取教训的过程。正如Graham所说：”Always be learning. If you’re not learning, you’re probably not on a path that leads to superlinear returns.”</p>
+<p>在选择学习方向时，不要过分追求确定性价值。过度优化学习内容可能会让我们错过那些看似无关但最终带来巨大回报的特殊领域（outliers）。好奇心是我们最可靠的指南针——它不会让我们对无趣的问题感兴趣，而那些真正有趣的问题往往能创造出具有超线性回报的新领域。正如文章所言：”雄心可以助你攀上现有的高峰，但追随好奇心可以让你在脚下长出一座山来。”</p>
+<p>在理解超线性回报时，区分Work和Job很重要。Work是创造性劳动，是”something created as a result of effort”；而Job则是”the regular work that a person does to earn money”。对于创作者而言，他们的Work是可以从一个Job带到另一个Job的积累，这种积累正是产生超线性回报的重要基础。</p>
+<h2 id="三、超线性回报的机遇与挑战"><a href="#三、超线性回报的机遇与挑战" class="headerlink" title="三、超线性回报的机遇与挑战"></a>三、超线性回报的机遇与挑战</h2><p>得益于过去50年的技术进步，组织的重要性不断下降，个人可以更容易地获取资源、寻找同道中人、不断试错学习。这为超线性回报创造了更多可能性。理论上，每个人都能通过持续学习获得某种形式的超线性回报。</p>
+<p>然而，超线性回报也带来了新的挑战。在这个模型中，强者愈强，弱者愈弱，这必然带来一定程度的不平等。并非每个人都适合或喜欢这种模式，传统模式中的既得利益者也可能抗拒这种变化。</p>
+<p>现代社会中还存在一些特殊的陷阱。我们容易陷入追求线性金钱回报的安全感中，而忽视了那些真正能产生复利效应的机会。以社交媒体为例，它虽然容易产生超线性回报，但其即时反馈机制可能误导用户追求短期效应，产出大量迎合算法的内容，而忽视了真正有价值的长期积累。</p>
+<p>认识到努力与回报并非总是线性关系，这个认知可能让人感到沮丧。但换个角度看，这个理论其实激励我们追随好奇心，从事那些当下可能看不到立即回报，但长期来看极具潜力的事情。它帮助我们建立长期主义思维，专注于持续成长和学习，而不是沉溺于眼前的得失。</p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">首页</a></li>
+        
+          <li><a href="/about/">关于</a></li>
+        
+          <li><a href="/archives/">归档</a></li>
+        
+          <li><a href="/">项目</a></li>
+        
+      </ul>
+    </div>
+
+    
+    
+      <div id="toc-footer" style="display: none">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%B6%85%E7%BA%BF%E6%80%A7%E5%9B%9E%E6%8A%A5%EF%BC%9A%E6%89%93%E7%A0%B4%E7%BA%BF%E6%80%A7%E6%80%9D%E7%BB%B4%E7%9A%84%E5%B1%80%E9%99%90"><span class="toc-number">1.</span> <span class="toc-text">超线性回报：打破线性思维的局限</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E7%90%86%E8%A7%A3%E8%B6%85%E7%BA%BF%E6%80%A7%E5%9B%9E%E6%8A%A5"><span class="toc-number">1.1.</span> <span class="toc-text">一、理解超线性回报</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E5%A6%82%E4%BD%95%E5%9C%A8%E7%8E%B0%E4%BB%A3%E7%A4%BE%E4%BC%9A%E4%B8%AD%E8%8E%B7%E5%8F%96%E8%B6%85%E7%BA%BF%E6%80%A7%E5%9B%9E%E6%8A%A5"><span class="toc-number">1.2.</span> <span class="toc-text">二、如何在现代社会中获取超线性回报</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E8%B6%85%E7%BA%BF%E6%80%A7%E5%9B%9E%E6%8A%A5%E7%9A%84%E6%9C%BA%E9%81%87%E4%B8%8E%E6%8C%91%E6%88%98"><span class="toc-number">1.3.</span> <span class="toc-text">三、超线性回报的机遇与挑战</span></a></li></ol></li></ol>
+      </div>
+    
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://blog.hanzhang.studio/2024/10/31/Paul-Graham%E7%9A%84%E8%B6%85%E7%BA%BF%E6%80%A7%E5%9B%9E%E6%8A%A5/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://blog.hanzhang.studio/2024/10/31/Paul-Graham%E7%9A%84%E8%B6%85%E7%BA%BF%E6%80%A7%E5%9B%9E%E6%8A%A5/&text=Paul Graham的超线性回报"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://blog.hanzhang.studio/2024/10/31/Paul-Graham%E7%9A%84%E8%B6%85%E7%BA%BF%E6%80%A7%E5%9B%9E%E6%8A%A5/&title=Paul Graham的超线性回报"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://blog.hanzhang.studio/2024/10/31/Paul-Graham%E7%9A%84%E8%B6%85%E7%BA%BF%E6%80%A7%E5%9B%9E%E6%8A%A5/&is_video=false&description=Paul Graham的超线性回报"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Paul Graham的超线性回报&body=Check out this article: https://blog.hanzhang.studio/2024/10/31/Paul-Graham%E7%9A%84%E8%B6%85%E7%BA%BF%E6%80%A7%E5%9B%9E%E6%8A%A5/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://blog.hanzhang.studio/2024/10/31/Paul-Graham%E7%9A%84%E8%B6%85%E7%BA%BF%E6%80%A7%E5%9B%9E%E6%8A%A5/&title=Paul Graham的超线性回报"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://blog.hanzhang.studio/2024/10/31/Paul-Graham%E7%9A%84%E8%B6%85%E7%BA%BF%E6%80%A7%E5%9B%9E%E6%8A%A5/&title=Paul Graham的超线性回报"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://blog.hanzhang.studio/2024/10/31/Paul-Graham%E7%9A%84%E8%B6%85%E7%BA%BF%E6%80%A7%E5%9B%9E%E6%8A%A5/&title=Paul Graham的超线性回报"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://blog.hanzhang.studio/2024/10/31/Paul-Graham%E7%9A%84%E8%B6%85%E7%BA%BF%E6%80%A7%E5%9B%9E%E6%8A%A5/&title=Paul Graham的超线性回报"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://blog.hanzhang.studio/2024/10/31/Paul-Graham%E7%9A%84%E8%B6%85%E7%BA%BF%E6%80%A7%E5%9B%9E%E6%8A%A5/&name=Paul Graham的超线性回报&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://blog.hanzhang.studio/2024/10/31/Paul-Graham%E7%9A%84%E8%B6%85%E7%BA%BF%E6%80%A7%E5%9B%9E%E6%8A%A5/&t=Paul Graham的超线性回报"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> 菜单</a>
+        
+          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> 目录</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> 分享</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> 返回顶部</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2024
+    ZHAI HANZHANG
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">首页</a></li><!--
+     --><!--
+       --><li><a href="/about/">关于</a></li><!--
+     --><!--
+       --><li><a href="/archives/">归档</a></li><!--
+     --><!--
+       --><li><a href="/">项目</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"复制到粘贴板！\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "复制成功！");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>
